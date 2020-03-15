@@ -39,6 +39,23 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontname" : "Ableton Sans Light",
+					"fontsize" : 10.0,
+					"id" : "obj-141",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 117.0, 103.0, 60.0, 18.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 104.75, 119.467153284671525, 35.0, 18.0 ],
+					"text" : "rst",
+					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ],
+					"textjustification" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-140",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -120,7 +137,9 @@
 					"outlettype" : [ "bang" ],
 					"parameter_enable" : 0,
 					"parameter_mappable" : 0,
-					"patching_rect" : [ 1321.0, 393.0, 48.0, 48.0 ]
+					"patching_rect" : [ 1321.0, 393.0, 23.0, 23.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 125.0, 118.0, 23.0, 23.0 ]
 				}
 
 			}
@@ -2669,7 +2688,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1220.0, 243.242706298828125, 60.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 93.75, 118.0, 35.0, 18.0 ],
+					"presentation_rect" : [ 56.0, 118.0, 35.0, 18.0 ],
 					"text" : "open",
 					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ],
 					"textjustification" : 1
@@ -3743,7 +3762,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 43.0, 901.0, 20.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 128.0, 117.0, 20.0, 20.0 ]
+					"presentation_rect" : [ 88.0, 118.0, 20.0, 20.0 ]
 				}
 
 			}
