@@ -7272,7 +7272,7 @@
 							"parameter_initial_enable" : 1,
 							"parameter_invisible" : 2,
 							"parameter_mmax" : 1.0,
-							"parameter_initial" : [ 0.1 ],
+							"parameter_initial" : [ 0.0 ],
 							"parameter_shortname" : "shuffle",
 							"parameter_type" : 0,
 							"parameter_unitstyle" : 1
