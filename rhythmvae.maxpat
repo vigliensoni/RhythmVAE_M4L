@@ -8052,6 +8052,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -8107,7 +8109,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1505.5, 288.0, 128.0, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 312.091102361679077, -0.435676574707031, 669.908897638320923, 168.0 ],
+					"presentation_rect" : [ 312.091102361679077, -0.435676574707031, 774.908897638320923, 168.0 ],
 					"proportion" : 0.5,
 					"rounded" : 15
 				}
@@ -9184,13 +9186,13 @@
 		"parameters" : 		{
 			"obj-2" : [ "live.text[3]", "live.text", 0 ],
 			"obj-65" : [ "live.numbox", "live.numbox", 0 ],
-			"obj-35" : [ "shuffle", "shuffle", 0 ],
 			"obj-73" : [ "live.numbox[6]", "live.numbox[5]", 0 ],
+			"obj-35" : [ "shuffle", "shuffle", 0 ],
 			"obj-83" : [ "live.numbox[3]", "live.numbox", 0 ],
 			"obj-28" : [ "Y", "Y", 0 ],
 			"obj-116" : [ "live.menu[1]", "live.menu", 0 ],
-			"obj-18" : [ "live.grid", "live.grid", 0 ],
 			"obj-96" : [ "live.numbox[9]", "live.numbox[5]", 0 ],
+			"obj-18" : [ "live.grid", "live.grid", 0 ],
 			"obj-123" : [ "live.numbox[14]", "live.numbox", 0 ],
 			"obj-67" : [ "live.text", "live.text", 0 ],
 			"obj-112" : [ "live.numbox[13]", "live.numbox[5]", 0 ],
@@ -9209,8 +9211,8 @@
 			"obj-15" : [ "live.menu", "live.menu", 0 ],
 			"obj-24" : [ "X", "X", 0 ],
 			"obj-90" : [ "live.numbox[8]", "live.numbox[5]", 0 ],
-			"obj-55" : [ "timeshift", "timeshift", 0 ],
 			"obj-98" : [ "live.numbox[11]", "live.numbox[5]", 0 ],
+			"obj-55" : [ "timeshift", "timeshift", 0 ],
 			"obj-9" : [ "live.text[4]", "live.text", 0 ],
 			"parameterbanks" : 			{
 
