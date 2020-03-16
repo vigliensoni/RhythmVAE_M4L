@@ -77,7 +77,7 @@ const MIDI_DRUM_MAP = {
 }
 
 const NUM_DRUM_CLASSES = DRUM_CLASSES.length;
-const LOOP_DURATION = 32; // 2bars x 16th note
+const LOOP_DURATION = 96; // 2bars x 16th note
 
 const ORIGINAL_DIM = NUM_DRUM_CLASSES * LOOP_DURATION;
 

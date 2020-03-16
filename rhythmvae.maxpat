@@ -1322,15 +1322,15 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 1174.5, 193.682029724121094, 100.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 564.091102361679077, 5.064323425292969, 66.0, 20.0 ],
+					"presentation_rect" : [ 564.091102361679077, 5.064323425292969, 120.0, 20.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_shortname" : "live.tab",
-							"parameter_enum" : [ "1", "2", "4" ],
+							"parameter_enum" : [ "1", "2", "4", "3", "6", "12" ],
 							"parameter_type" : 2,
 							"parameter_unitstyle" : 0,
 							"parameter_longname" : "live.tab",
-							"parameter_mmax" : 2
+							"parameter_mmax" : 5
 						}
 
 					}
@@ -2790,7 +2790,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1369.5, 690.242706298828125, 56.0, 17.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 722.591102361679077, 7.064323425292969, 51.0, 17.0 ],
+					"presentation_rect" : [ 774.591102361679077, 6.064323425292969, 51.0, 17.0 ],
 					"text" : "grid offset ",
 					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ],
 					"textjustification" : 1
@@ -2808,7 +2808,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 1326.5, 691.242706298828125, 37.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 773.591102361679077, 6.064323425292969, 37.0, 18.0 ],
+					"presentation_rect" : [ 825.591102361679077, 5.064323425292969, 37.0, 18.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_shortname" : "timeshift",
@@ -7304,8 +7304,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 1073.0, 321.257293701171875, 108.0, 22.0 ],
-					"text" : "count_for_me 16"
+					"patching_rect" : [ 1073.0, 321.257293701171875, 99.0, 22.0 ],
+					"text" : "count_for_me 24"
 				}
 
 			}
@@ -7329,9 +7329,9 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1162.0, 164.0, 57.0, 17.0 ],
+					"patching_rect" : [ 1160.5, 135.871353149414062, 57.0, 17.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 636.591102361679077, 6.564323425292969, 35.0, 17.0 ],
+					"presentation_rect" : [ 694.591102361679077, 5.064323425292969, 35.0, 17.0 ],
 					"text" : "shuffle",
 					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ],
 					"textjustification" : 1
@@ -7348,9 +7348,9 @@
 					"outlettype" : [ "", "float" ],
 					"parameter_enable" : 1,
 					"parameter_mappable" : 0,
-					"patching_rect" : [ 1119.0, 165.0, 37.0, 18.0 ],
+					"patching_rect" : [ 1117.5, 136.871353149414062, 37.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 676.591102361679077, 6.064323425292969, 37.0, 18.0 ],
+					"presentation_rect" : [ 734.591102361679077, 4.564323425292969, 37.0, 18.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_shortname" : "shuffle",
@@ -8137,6 +8137,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -9275,8 +9277,8 @@
  ],
 		"parameters" : 		{
 			"obj-75" : [ "live.text[2]", "live.text", 0 ],
-			"obj-87" : [ "live.numbox[7]", "live.numbox[5]", 0 ],
 			"obj-35" : [ "shuffle", "shuffle", 0 ],
+			"obj-87" : [ "live.numbox[7]", "live.numbox[5]", 0 ],
 			"obj-62" : [ "live.numbox[5]", "live.numbox[5]", 0 ],
 			"obj-116" : [ "live.menu[1]", "live.menu", 0 ],
 			"obj-97" : [ "live.numbox[10]", "live.numbox[5]", 0 ],
@@ -9286,8 +9288,8 @@
 			"obj-15" : [ "live.menu", "live.menu", 0 ],
 			"obj-2" : [ "live.text[3]", "live.text", 0 ],
 			"obj-122" : [ "live.menu[2]", "live.menu", 0 ],
-			"obj-83" : [ "live.numbox[3]", "live.numbox", 0 ],
 			"obj-90" : [ "live.numbox[8]", "live.numbox[5]", 0 ],
+			"obj-83" : [ "live.numbox[3]", "live.numbox", 0 ],
 			"obj-68" : [ "live.text[1]", "live.text", 0 ],
 			"obj-1" : [ "live.step[1]", "live.step", 0 ],
 			"obj-144" : [ "live.tab[1]", "live.tab[1]", 0 ],
