@@ -39,7 +39,7 @@ function getTempo(midiFile){
 
 // Get location of a note in pianoroll
 function getNoteIndexAndTimeshift(note, tempo){
-    const unit = (60.0 / tempo) / 4.0; // the duration of 16th note
+    const unit = (60.0 / tempo) / 12.0; // the duration of 16th note
     const half_unit = unit * 0.5;
 
     const index = Math.max(0, Math.floor((note.time + half_unit) / unit)) // centering 
@@ -66,7 +66,7 @@ function processPianoroll(midiFile){
                 let timing = getNoteIndexAndTimeshift(note, tempo);
                 let index = timing[0];
                 let timeshift = timing[1];
-                
+
                 // add new array
                 if (Math.floor(index / LOOP_DURATION) >= onsets.length){
                     onsets.push(utils.create2DArray(NUM_DRUM_CLASSES, LOOP_DURATION));
@@ -89,7 +89,7 @@ function processPianoroll(midiFile){
             }
         })
     })
-
+    
     /*    for debug - output pianoroll */
     // if (velocities.length > 0){ 
     //     var index = utils.getRandomInt(velocities.length); 
