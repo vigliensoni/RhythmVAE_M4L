@@ -2,8 +2,8 @@
 	"name" : "M4L.RhythmVAE",
 	"version" : 1,
 	"creationdate" : 3650640218,
-	"modificationdate" : 3667133167,
-	"viewrect" : [ 24.0, 229.0, 300.0, 500.0 ],
+	"modificationdate" : 3667556904,
+	"viewrect" : [ 79.0, 576.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
@@ -14,7 +14,37 @@
 				"kind" : "patcher",
 				"local" : 1,
 				"singleton" : 				{
-					"bootpath" : "~/Documents/2_CODE/06-MUZIK-ML/RhythmVAE_M4L/subpatches",
+					"bootpath" : "~/Documents/2_CODE/R-VAE/subpatches",
+					"projectrelativepath" : "../subpatches"
+				}
+
+			}
+,
+			"makenote_for_me.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/2_CODE/R-VAE/subpatches",
+					"projectrelativepath" : "../subpatches"
+				}
+
+			}
+,
+			"setup_1_16.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/2_CODE/R-VAE/subpatches",
+					"projectrelativepath" : "../subpatches"
+				}
+
+			}
+,
+			"shuffle_metro.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/2_CODE/R-VAE/subpatches",
 					"projectrelativepath" : "../subpatches"
 				}
 
@@ -25,30 +55,11 @@
 				"local" : 1,
 				"toplevel" : 1,
 				"singleton" : 				{
-					"bootpath" : "~/Documents/2_CODE/06-MUZIK-ML/RhythmVAE_M4L",
+					"bootpath" : "~/Documents/2_CODE/R-VAE",
 					"projectrelativepath" : ".."
 				}
 
 			}
-,
-			"makenote_for_me.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"setup_1_16.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"shuffle_metro.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-
-		}
-,
-		"code" : 		{
 
 		}
 
@@ -60,7 +71,7 @@
 ,
 	"searchpath" : 	{
 		"0" : 		{
-			"bootpath" : "~/Documents/2_CODE/06-MUZIK-ML/RhythmVAE_M4L/src",
+			"bootpath" : "~/Documents/2_CODE/R-VAE/src",
 			"projectrelativepath" : "../src",
 			"label" : "JS code",
 			"recursive" : 1,
@@ -69,18 +80,18 @@
 		}
 ,
 		"1" : 		{
-			"bootpath" : "~/Documents/2_CODE/06-MUZIK-ML/RhythmVAE_M4L/node_modules",
-			"projectrelativepath" : "../node_modules",
-			"label" : "node modeuls",
+			"bootpath" : "~/Documents/2_CODE/R-VAE/subpatches",
+			"projectrelativepath" : "../subpatches",
+			"label" : "",
 			"recursive" : 1,
 			"enabled" : 1,
 			"includeincollective" : 1
 		}
 ,
 		"2" : 		{
-			"bootpath" : "~/Documents/2_CODE/06-MUZIK-ML/RhythmVAE_M4L/subpatches",
-			"projectrelativepath" : "../subpatches",
-			"label" : "",
+			"bootpath" : "~/Documents/2_CODE/R-VAE/node_modules",
+			"projectrelativepath" : "../node_modules",
+			"label" : "node modules",
 			"recursive" : 1,
 			"enabled" : 1,
 			"includeincollective" : 1
@@ -89,7 +100,7 @@
 	}
 ,
 	"detailsvisible" : 0,
-	"amxdtype" : 1835887981,
+	"amxdtype" : 1633771873,
 	"readonly" : 0,
 	"devpathtype" : 0,
 	"devpath" : ".",
