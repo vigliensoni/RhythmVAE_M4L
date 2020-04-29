@@ -1,11 +1,13 @@
-# M4L.RhythmVAE
-Max for Live(M4L) Rhythm generator using Variational Autoencoder(VAE) 
+# R-VAE
 
+This is a modded version of M4L.RhythmVAE by Nao Tokui
 
-## Help me!!
+Rhythm generator using Variational Autoencoder(VAE) as a Max for Live (M4L) plugin
 
-I need your feedback! It takes a few minutes and it's anonymous.  
-https://forms.gle/1HBhDV9k5pCKnPNE8
+## Generating a M4L device
+
+- Make sure in the Project Inspector you use “MIDI“ in *Max for Live Device Type*
+- Then, export using “Export Max for Live Device ...”
 
 
 ## How it works
