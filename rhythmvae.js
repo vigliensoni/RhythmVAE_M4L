@@ -11,6 +11,8 @@ const DRUM_CLASSES = require('./src/constants.js').DRUM_CLASSES;
 const NUM_DRUM_CLASSES = require('.//src/constants.js').NUM_DRUM_CLASSES;
 const LOOP_DURATION = require('.//src/constants.js').LOOP_DURATION;
 const MIN_ONSETS_THRESHOLD = require('./src/constants.js').MIN_ONSETS_THRESHOLD;
+const NUM_MIN_MIDI_FILES = 64;
+
 
 // VAE model and Utilities
 const utils = require('./src/utils.js');
@@ -140,6 +142,13 @@ function processMidiFile(filename){
     return true;
 }
 
+// 1. Go to dir 
+// 2. Read, validate, and count MIDI files
+// 3. If ( count < NUM_MIN_MIDI_FILES ) { 
+//     dup_factor = Math.ceil(NUM_MIN_MIDI_FILES / files.length)
+// }
+
+
 // Add training data
 Max.addHandler("midi", (filename) =>  {
     var count = 0;
@@ -148,11 +157,22 @@ Max.addHandler("midi", (filename) =>  {
         // iterate over *.mid or *.midi files 
         glob(filename + '**/*.+(mid|midi)', {}, (err, files)=>{
             utils.post("# of files in dir: " + files.length); 
+            // compute data duplication factor 
+            if ( files.length < NUM_MIN_MIDI_FILES ) { 
+                dup_factor = Math.ceil(NUM_MIN_MIDI_FILES / files.length );
+                utils.post("duplication factor: " + dup_factor); 
+            } else { 
+                dup_factor = 1; 
+            }
+            
             if (err) utils.error(err); 
             else {
                 for (var idx in files){   
                     try {
-                        if (processMidiFile(files[idx])) count += 1;
+                        for (i = 0; i < dup_factor; i++ ){
+                            // apply data duplication 
+                            if (processMidiFile(files[idx])) count += 1;
+                        }
                     } catch(error) {
                         console.error("failed to process " + files[idx] + " - " + error);
                       }
@@ -207,7 +227,7 @@ async function generatePattern(z1, z2, threshold, noise_range){
                 Max.outlet("matrix_output", j + 1, i + 1, 1); // index for live.grid starts from 1
            
                 // for live.step
-                sequence.push(Math.floor(velocities[i][j]*127.)); // 0-1 -> 0-127
+                sequence.push(Math.floor(velocities[i][j]*127. + 1)); // 0-1 -> 0-127
                 sequenceTS.push(Math.floor(utils.scale(timeshifts[i][j], -1., 1, 0, 127))); // -1 - 1 -> 0 - 127
               } else {
                 sequence.push(0);

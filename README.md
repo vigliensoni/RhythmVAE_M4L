@@ -1,11 +1,18 @@
-# M4L.RhythmVAE
-Max for Live(M4L) Rhythm generator using Variational Autoencoder(VAE) 
+# R-VAE
 
+This is a modded version of M4L.RhythmVAE by Nao Tokui
 
-## Help me!!
+Rhythm generator using Variational Autoencoder(VAE) as a Max for Live (M4L) plugin
 
-I need your feedback! It takes a few minutes and it's anonymous.  
-https://forms.gle/1HBhDV9k5pCKnPNE8
+## Generating a M4L device
+
+- Make sure in the Project Inspector you use “MIDI“ in *Max for Live Device Type*
+- Then, export using “Export Max for Live Device ...”
+
+## TO DOs (and issues and fixes)
+
+- To open a Max or M4L patch without triggering `loadbang` or `loadmess` use `Shift+Command`
+- To export M4L device the folder name with `tfjs` is located has to be changed from `node_modules/@tensorflow/tfjs-node/lib/napi-v3/tfjs_binding.node` to `node_modules/@tensorflow/tfjs-node/lib/napi-v5/tfjs_binding.node`. Analogously, when working in Max, the folder has to names `napi-v3`. What I ended up doing is duplicating the contents from `napi-v3` to `napi-v5`
 
 
 ## How it works
