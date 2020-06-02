@@ -13,6 +13,8 @@ const LOOP_DURATION = require('.//src/constants.js').LOOP_DURATION;
 const MIN_ONSETS_THRESHOLD = require('./src/constants.js').MIN_ONSETS_THRESHOLD;
 const NUM_MIN_MIDI_FILES = 64;
 
+const ROWS = 3 // number of rows for UI matrix
+const COLS = 3 // number of cols for UI matrix
 
 // VAE model and Utilities
 const utils = require('./src/utils.js');
@@ -260,12 +262,54 @@ Max.addHandler("stop", ()=>{
     vae.stopTraining();
 });
 
+
+
+async function createMatrix(path){
+    // matrix will store the values from latent space for a given (ROW, COL) resolution
+    
+    utils.log_status("Creating matrix");
+    let matrix = new Float32Array(ROWS*COLS*LOOP_DURATION) // TODO: add the other instruments
+
+
+    let normalize = (x, max, scaleToMax) => (x/max - 0.5) * 2 * scaleToMax
+    
+
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        r_norm = normalize(r, ROWS, 3)         //   normalize sample to ±3
+        c_norm = normalize(c, COLS, 3)        //   normalize sample to ±3
+        let [onsets, velocities, timeshifts] = vae.generatePattern(r_norm, c_norm, 0);
+        matrix.set(onsets[0], c*r) // TODO: add the other instruments
+        console.log(r,c)
+      }
+    }
+    
+    fs.writeFile(path + '-matrix.data', Buffer.from(matrix), function(err) {
+        if (err) return console.log(err)
+        console.log(matrix)
+        console.log('Matrix saved!')
+
+    })
+
+    fs.readFile(path + '-matrix.data', (err, data) => {
+        if (err) console.log('Error:', err)
+        console.log('Read data:', new Float32Array(data))
+    })
+
+  }
+  
+
+
+
+
+
 Max.addHandler("savemodel", (path)=>{
     // check if already trained or not
     if (vae.isReadyToGenerate()){
         filepath = "file://" + path;
         vae.saveModel(filepath);
         utils.log_status("Model saved.");
+        createMatrix(path)
     } else {
         utils.error_status("Train a model first!");
     }
