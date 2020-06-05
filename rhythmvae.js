@@ -13,8 +13,8 @@ const LOOP_DURATION = require('.//src/constants.js').LOOP_DURATION;
 const MIN_ONSETS_THRESHOLD = require('./src/constants.js').MIN_ONSETS_THRESHOLD;
 const NUM_MIN_MIDI_FILES = 64;
 
-const ROWS = 30 // number of rows for UI matrix
-const COLS = 30 // number of cols for UI matrix
+const ROWS = 3 // number of rows for UI matrix
+const COLS = 3 // number of cols for UI matrix
 
 // VAE model and Utilities
 const utils = require('./src/utils.js');
@@ -265,12 +265,16 @@ Max.addHandler("stop", ()=>{
 
 
 async function createMatrix(path){
-    // matrix will store the values from latent space for a given (ROW, COL) resolution
-    
-    utils.log_status("Creating matrix");
+
+    // MATRIX 1
+    // This matrix will store the values from latent space for a given (ROW, COL) resolution in the format that VAE provides. That is, for each (r e ROW) and (c e COL) 
+    // i1_t1, i1_t2, ... , i1_tT
+    // i2_t1, i2_t2, ... , i2_tT
+    // iI_t1, iI_t2, ... , iI_tT
+    utils.log_status("Creating matrix1");
     let matrix = new Float32Array(ROWS*COLS*LOOP_DURATION*NUM_DRUM_CLASSES) 
     let normalize = (x, max, scaleToMax) => (x/max - 0.5) * 2 * scaleToMax
-    
+
     for (let r = 0; r < ROWS; r++) {
       for (let c = 0; c < COLS; c++) {
         r_norm = normalize(r, ROWS, 3)         //   normalize sample to ±3
@@ -285,17 +289,53 @@ async function createMatrix(path){
     } 
 
     fs.writeFileSync(path+'-matrix.data', matrix)
-    console.log('Matrix Saved: ', matrix)
 
+
+    // MATRIX 2
+    // This matrix stores the values from latent space to facilitate rendering an image. That is, the outer loop is time and we see an image:
+    // i1_c0_r0, i2_c0_r0, ...,  i1_c1_r0, i2_c1_r0
+    // i3_c0_r0, i4_c0_r0, ...,  i3_c1_r0, i3_c1_r0
+    // i1_c0_r1, i2_c0_r1, ...,  i1_c1_r1, i2_c1_r1
+    // i3_c0_r1, i4_c0_r1, ...,  i3_c1_r1, i3_c1_r1
+    
+    utils.log_status("Creating matrix2");
+
+    // These lines are for testing the matrix generation
+    // let ROWS = 2
+    // let COLS = 2
+    // let LOOP_DURATION = 2
+    // let NUM_DRUM_CLASSES = 4
+    // let matrix = new Float32Array(ROWS*COLS*LOOP_DURATION*NUM_DRUM_CLASSES) 
+    // for (let i = 0; i < NUM_DRUM_CLASSES; i++) {
+    //     matrix[LOOP_DURATION*i] = 1    
+    // }
+
+    let matrix2 = new Float32Array(ROWS*COLS*LOOP_DURATION*NUM_DRUM_CLASSES) 
+
+    let counter = 0;
+    for (let t = 0; t < LOOP_DURATION; t++) {
+        for (let r = 0; r < ROWS; r++) {
+            for (let i2 = 0; i2 < Math.sqrt(NUM_DRUM_CLASSES); i2++) {
+                for (let c = 0; c < COLS; c++) {
+                    for (let i1 = 0; i1 < Math.sqrt(NUM_DRUM_CLASSES); i1++) {
+                        let pos = i1 * LOOP_DURATION + c * NUM_DRUM_CLASSES * LOOP_DURATION + i2 * LOOP_DURATION * Math.sqrt(NUM_DRUM_CLASSES) + r * NUM_DRUM_CLASSES * LOOP_DURATION * COLS + t
+                        matrix2[counter] = matrix[pos]
+                        // console.log(counter, pos)
+                        counter++
+                    }
+                }
+            }
+        }
+    }
+    fs.writeFileSync(path+'-matrix2.data', matrix2)
+    // console.log('Matrix1 Saved: ', matrix2)
+
+    // This reads the matrix back into memory
     // let data = fs.readFileSync(path+'-matrix.data')
     // let copyMatrix = new Float32Array(data.buffer, data.byteOffset, data.length / Float32Array.BYTES_PER_ELEMENT)
     // console.log('Read Data: ', copyMatrix)
-
   }
   
-
-
-
 
 
 Max.addHandler("savemodel", (path)=>{
