@@ -17,6 +17,8 @@ Similarly to RhythmVAE, the goal of R-VAE is the exploration of latent spaces of
 - Toggle for fix or variable velocity was added
 - Implement a hack to avoid inconsistencies between versions of `tfjs_binding.node` under different folder structures. See [this](https://github.com/vigliensoni/R-VAE/issues/2)
 - Models of footwork and trap learned with as little as 12 clips can be downloaded [from here](https://github.com/vigliensoni/R-VAE-JS/tree/master/dist/data)
+- A 30 * 30 matrix is generated based on the latent space. That is, the continuous latent space is sampled and the sequences of onsets per instrument are stored in a matrix.
+- XY grid receives and sends OSC messages. The ports used are the Wekinator defaults (12000 and 6448)
 
 
 
