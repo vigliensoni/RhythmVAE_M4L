@@ -108,7 +108,8 @@ function generatePattern(z1, z2, noise_range=0.0){
 }
 
 async function saveModel(filepath){
-  model.saveModel(filepath);
+  const saved = await model.saveModel(filepath);
+  return "Model saved!";
 }
 
 async function loadModel(filepath){
