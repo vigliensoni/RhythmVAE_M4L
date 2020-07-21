@@ -24,6 +24,7 @@ Similarly to RhythmVAE, the goal of R-VAE is the exploration of latent spaces of
 
 ## Generating a M4L device
 
-- Make sure in the Project Inspector in MaxMSP is set to “MIDI“ in *Max for Live Device Type*
+- Make sure to open the `*.maxproj` project file. Then in the Project Inspector set *Max for Live Device Type* to “MIDI.“
+- Choose *Export Max for Live Device*
 - Get your M4L device from the `/release` folder
 - Play!
