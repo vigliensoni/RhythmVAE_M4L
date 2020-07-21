@@ -366,17 +366,14 @@ Max.addHandler("savemodel", (path)=>{
         // vae.saveModel(filepath);
         // utils.log_status("Model saved.");
 
-
-        // filepath = "file://" + path;
-        // vae.saveModel(filepath).then(result => {
-        //     console.log('Result was: ', result)
-        // })
-
         createMatrix(path).then(result => {
-            console.log('Result was: ', result)
-        })
+            console.log('CM Result was: ', result);
+        })        
 
-        
+        filepath = "file://" + path;
+        vae.saveModel(filepath).then(result => {
+            console.log('SM Result was: ', result)
+        })
 
     } else {
         utils.error_status("Train a model first!");
