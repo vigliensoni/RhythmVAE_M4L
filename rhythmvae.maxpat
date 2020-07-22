@@ -370,7 +370,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 174.0, 227.0, 163.0, 22.0 ],
-									"text" : "0.018333 0.671667"
+									"text" : "0.166667 0.166667"
 								}
 
 							}
@@ -554,7 +554,7 @@
 					"patching_rect" : [ 432.091102361679077, 4.4375, 132.0, 21.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 559.091102361679077, 7.564323425292969, 114.0, 21.0 ],
-					"text" : "R-VAE OSC-output",
+					"text" : "20200722",
 					"textcolor" : [ 0.996078431372549, 0.996078431372549, 0.996078431372549, 1.0 ]
 				}
 
@@ -567,7 +567,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 698.0, 396.0, 177.66666666666697, 22.0 ],
-					"text" : "generate -2.89 1.03 0.5"
+					"text" : "generate -2. -2. 0.5"
 				}
 
 			}
@@ -1736,7 +1736,6 @@
 , 			{
 				"box" : 				{
 					"activebgcolor" : [ 0.454959, 0.684788, 0.824976, 1.0 ],
-					"hidden" : 1,
 					"id" : "obj-83",
 					"maxclass" : "live.numbox",
 					"numinlets" : 1,
@@ -1765,6 +1764,7 @@
 , 			{
 				"box" : 				{
 					"activebgcolor" : [ 0.345098, 0.513725, 0.572549, 1.0 ],
+					"hidden" : 1,
 					"id" : "obj-123",
 					"maxclass" : "live.numbox",
 					"numinlets" : 1,
@@ -2537,6 +2537,7 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
+					"hidden" : 1,
 					"id" : "obj-136",
 					"maxclass" : "multislider",
 					"numinlets" : 1,
@@ -5858,7 +5859,6 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.847058823529412, 0.847058823529412, 0.847058823529412, 1.0 ],
-					"hidden" : 1,
 					"id" : "obj-91",
 					"maxclass" : "multislider",
 					"numinlets" : 1,
@@ -8827,7 +8827,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
+					"outlettype" : [ "float", "float" ],
 					"patching_rect" : [ 1307.0, 712.5, 252.0, 22.0 ],
 					"text" : "makenote_for_me @velocity 1 @timeshift 0"
 				}
@@ -9142,7 +9142,7 @@
 					"patching_rect" : [ 297.25, 583.0, 164.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 6.0, 141.868613138686129, 142.0, 18.0 ],
-					"text" : "Creating matrix1",
+					"text" : "Matrix result was: ",
 					"textcolor" : [ 0.999999284744263, 0.999974429607391, 0.999991297721863, 1.0 ],
 					"textjustification" : 1
 				}
@@ -9556,6 +9556,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -10795,6 +10797,20 @@
 				"bootpath" : "~/Documents/3_Github/R-VAE",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "makenote_for_me.maxpat",
+				"bootpath" : "~/Documents/3_Github/R-VAE/subpatches",
+				"patcherrelativepath" : "./subpatches",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "setup_1_16.maxpat",
+				"bootpath" : "~/Documents/3_Github/R-VAE/subpatches",
+				"patcherrelativepath" : "./subpatches",
+				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
