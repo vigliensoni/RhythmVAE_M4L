@@ -28,3 +28,7 @@ Similarly to RhythmVAE, the goal of R-VAE is the exploration of latent spaces of
 - Choose *Export Max for Live Device*
 - Get your M4L device from the `/release` folder
 - Play!
+
+## Requirements
+
+- macOS >= 10.12.x (due to `clock_gettime` requirements of libtensorflow)
