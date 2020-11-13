@@ -20,6 +20,21 @@ Similarly to RhythmVAE, the goal of R-VAE is the exploration of latent spaces of
 - A 30 * 30 matrix is generated based on the latent space. That is, the continuous latent space is sampled and the sequences of onsets per instrument are stored in a matrix.
 - XY grid receives and sends OSC messages. The ports used are the Wekinator defaults (12000 and 6448)
 
+## Install instructions for developing
+
+- After downloading, you have to install all the node dependencies. To do this, `cd` to the project directory and do:
+
+```
+npm install
+```
+
+If not installed, also install Tensorflow for Node
+
+```
+npm install @tensorflow/tfjs-node
+```
+
+R-VAE is also expecting the `tfjs_binding.node` inside `node_modules/@tensorflow/tfjs-node/lib/napi-v5`. If for some reason the version number is different, duplicate that folder and rename it so that they match.
 
 
 ## Generating a M4L device
