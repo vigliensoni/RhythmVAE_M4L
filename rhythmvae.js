@@ -1,9 +1,10 @@
-const path = require('path');
 const Max = require('max-api');
 const fs = require('fs')
 const glob = require('glob');
 const tf = require('@tensorflow/tfjs-node');
 const { Midi } = require('@tonejs/midi'); // https://github.com/Tonejs/Midi
+const path = require('path');
+
 
 // Constants 
 const MIDI_DRUM_MAP = require('./src/constants.js').MIDI_DRUM_MAP;
@@ -267,8 +268,9 @@ Max.addHandler("stop", ()=>{
 async function createMatrix(path){
 
     // MATRIX 1
-    // This matrix will store the values from latent space for a given (ROW, COL) resolution in the format that VAE provides. That is, for each (r e ROW) and (c e COL) 
-    // i1_t1, i1_t2, ... , i1_tT
+    // This matrix will store the values from latent space for a given (ROW, COL) 
+    // resolution in the format that VAE provides. That is, for each (r e ROW) and (c e COL) 
+    // i1_t1, i1_t2, ... , i1_tT (i.e., instrument 1 on time 1, ... )
     // i2_t1, i2_t2, ... , i2_tT
     // iI_t1, iI_t2, ... , iI_tT
     utils.log_status("Creating matrix1");
@@ -294,7 +296,8 @@ async function createMatrix(path){
 
 
     // MATRIX 2
-    // This matrix stores the values from latent space to facilitate rendering an image. That is, the outer loop is time, inside each moment we see an image:
+    // This matrix stores the values from latent space to facilitate rendering
+    // an image. That is, the outer loop is time, inside each moment we see an image:
     // i1_c0_r0, i2_c0_r0, ...,  i1_c1_r0, i2_c1_r0
     // i3_c0_r0, i4_c0_r0, ...,  i3_c1_r0, i3_c1_r0
     // i1_c0_r1, i2_c0_r1, ...,  i1_c1_r1, i2_c1_r1
@@ -395,6 +398,20 @@ Max.addHandler("epochs", (e)=>{
     vae.setEpochs(e);
     utils.post("number of epochs: " + e);
 });
+
+
+let visualizerMatrix
+Max.addHandler("loadspace", () => {
+    let folder = "/Users/gabriel/Documents/3_GitHub/R-VAE"
+    let visPath = "/LS-1.data";
+    console.log(path.join(folder,visPath));
+    fs.readFile(path.join(folder,visPath), (err, buf) => {
+        if (err) throw err;
+        visualizerMatrix = new Float32Array(buf.buffer, buf.byteOffset, buf.byteLength/4);
+        utils.post("vis matrix:" + visualizerMatrix.slice(0,10));
+    })
+})
+
 
 function reportNumberOfBars(){
     Max.outlet("train_bars", train_data_onsets.length * 2);  // number of bars for training
