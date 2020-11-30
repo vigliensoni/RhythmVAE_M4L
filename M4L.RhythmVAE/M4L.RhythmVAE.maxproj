@@ -2,8 +2,8 @@
 	"name" : "M4L.RhythmVAE",
 	"version" : 1,
 	"creationdate" : 3650640218,
-	"modificationdate" : 3673875144,
-	"viewrect" : [ 123.0, 608.0, 300.0, 500.0 ],
+	"modificationdate" : 3688974822,
+	"viewrect" : [ 47.0, 524.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
@@ -14,7 +14,7 @@
 				"kind" : "patcher",
 				"local" : 1,
 				"singleton" : 				{
-					"bootpath" : "~/Documents/2_CODE/R-VAE/subpatches",
+					"bootpath" : "~/Documents/3_GitHub/R-VAE/subpatches",
 					"projectrelativepath" : "../subpatches"
 				}
 
@@ -24,7 +24,7 @@
 				"kind" : "patcher",
 				"local" : 1,
 				"singleton" : 				{
-					"bootpath" : "~/Documents/2_CODE/R-VAE/subpatches",
+					"bootpath" : "~/Documents/3_GitHub/R-VAE/subpatches",
 					"projectrelativepath" : "../subpatches"
 				}
 
@@ -34,7 +34,7 @@
 				"kind" : "patcher",
 				"local" : 1,
 				"singleton" : 				{
-					"bootpath" : "~/Documents/2_CODE/R-VAE/subpatches",
+					"bootpath" : "~/Documents/3_GitHub/R-VAE/subpatches",
 					"projectrelativepath" : "../subpatches"
 				}
 
@@ -44,7 +44,7 @@
 				"kind" : "patcher",
 				"local" : 1,
 				"singleton" : 				{
-					"bootpath" : "~/Documents/2_CODE/R-VAE/subpatches",
+					"bootpath" : "~/Documents/3_GitHub/R-VAE/subpatches",
 					"projectrelativepath" : "../subpatches"
 				}
 
@@ -55,7 +55,7 @@
 				"local" : 1,
 				"toplevel" : 1,
 				"singleton" : 				{
-					"bootpath" : "~/Documents/2_CODE/R-VAE",
+					"bootpath" : "~/Documents/3_GitHub/R-VAE",
 					"projectrelativepath" : ".."
 				}
 
@@ -75,7 +75,7 @@
 ,
 	"searchpath" : 	{
 		"0" : 		{
-			"bootpath" : "~/Documents/2_CODE/R-VAE/src",
+			"bootpath" : "~/Documents/3_GitHub/R-VAE/src",
 			"projectrelativepath" : "../src",
 			"label" : "JS code",
 			"recursive" : 1,
@@ -84,7 +84,7 @@
 		}
 ,
 		"1" : 		{
-			"bootpath" : "~/Documents/2_CODE/R-VAE/subpatches",
+			"bootpath" : "~/Documents/3_GitHub/R-VAE/subpatches",
 			"projectrelativepath" : "../subpatches",
 			"label" : "",
 			"recursive" : 1,
@@ -93,7 +93,7 @@
 		}
 ,
 		"2" : 		{
-			"bootpath" : "~/Documents/2_CODE/R-VAE/node_modules",
+			"bootpath" : "~/Documents/3_GitHub/R-VAE/node_modules",
 			"projectrelativepath" : "../node_modules",
 			"label" : "node modules",
 			"recursive" : 1,
