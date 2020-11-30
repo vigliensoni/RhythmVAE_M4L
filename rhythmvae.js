@@ -13,13 +13,18 @@ const NUM_DRUM_CLASSES = require('.//src/constants.js').NUM_DRUM_CLASSES;
 const LOOP_DURATION = require('.//src/constants.js').LOOP_DURATION;
 const MIN_ONSETS_THRESHOLD = require('./src/constants.js').MIN_ONSETS_THRESHOLD;
 const NUM_MIN_MIDI_FILES = 64;
+const COLS = require('./src/constants.js').COLS; // number of rows for UI matrix
+const ROWS = require('./src/constants.js').ROWS; // number of cols for UI matrix
 
-const ROWS = 30 // number of rows for UI matrix
-const COLS = 30 // number of cols for UI matrix
 
 // VAE model and Utilities
 const utils = require('./src/utils.js');
 const vae = require('./src/vae.js');
+const visualizer = require('./src/visualizer.js');
+
+
+// Visualizer and utilities
+
 
 // This will be printed directly to the Max console
 Max.post(`Loaded the ${path.basename(__filename)} script`);
@@ -151,7 +156,6 @@ function processMidiFile(filename){
 //     dup_factor = Math.ceil(NUM_MIN_MIDI_FILES / files.length)
 // }
 
-
 // Add training data
 Max.addHandler("midi", (filename) =>  {
     var count = 0;
@@ -265,112 +269,9 @@ Max.addHandler("stop", ()=>{
 
 
 
-async function createMatrix(path){
-
-    // MATRIX 1
-    // This matrix will store the values from latent space for a given (ROW, COL) 
-    // resolution in the format that VAE provides. That is, for each (r e ROW) and (c e COL) 
-    // i1_t1, i1_t2, ... , i1_tT (i.e., instrument 1 on time 1, ... )
-    // i2_t1, i2_t2, ... , i2_tT
-    // iI_t1, iI_t2, ... , iI_tT
-    utils.log_status("Creating matrix1");
-    let matrix = new Float32Array(ROWS*COLS*LOOP_DURATION*NUM_DRUM_CLASSES) 
-    let normalize = (x, max, scaleToMax) => (x/max - 0.5) * 2 * scaleToMax
-
-    for (let r = 0; r < ROWS; r++) {
-      for (let c = 0; c < COLS; c++) {
-        //   normalize samples to ±3. Inverse r allows start from [-3, 3] instead of [-3, -3]
-        let r_norm = normalize(r, ROWS, 3) * -1   
-        let c_norm = normalize(c, COLS, 3)        
-        let [onsets, velocities, timeshifts] = vae.generatePattern(c_norm, r_norm, 0);
-        for (let i = 0; i < NUM_DRUM_CLASSES; i++) {
-            // This iterates over instruments, columns, and rows, given a loop duration length. If NUM_DRUM_CLASSES and LOOP_DURATION are one, the iteration increases one by one over columns and rows.
-            matrix.set(onsets[i], ((COLS * r + c) * NUM_DRUM_CLASSES + i) * LOOP_DURATION )
-            // console.log(r,c,i, onsets[i])    
-          }
-      }
-    } 
-
-    // fs.writeFileSync(path+'-matrix.data', matrix)
-    fs.writeFileSync(path+'-matrix-LS.data', matrix)
-
-
-    // MATRIX 2
-    // This matrix stores the values from latent space to facilitate rendering
-    // an image. That is, the outer loop is time, inside each moment we see an image:
-    // i1_c0_r0, i2_c0_r0, ...,  i1_c1_r0, i2_c1_r0
-    // i3_c0_r0, i4_c0_r0, ...,  i3_c1_r0, i3_c1_r0
-    // i1_c0_r1, i2_c0_r1, ...,  i1_c1_r1, i2_c1_r1
-    // i3_c0_r1, i4_c0_r1, ...,  i3_c1_r1, i3_c1_r1
-    
-    // utils.log_status("Creating matrix2");
-
-
-    let matrix2 = new Float32Array(ROWS*COLS*LOOP_DURATION*NUM_DRUM_CLASSES) 
-
-    let counter = 0;
-    let instSide = Math.sqrt(NUM_DRUM_CLASSES)
-    for (let t = 0; t < LOOP_DURATION; t++) {
-        for (let r = 0; r < ROWS; r++) {
-            for (let i2 = 0; i2 < instSide; i2++) {
-                for (let c = 0; c < COLS; c++) {
-                    for (let i1 = 0; i1 < instSide; i1++) {
-                        let pos = ( i1 * LOOP_DURATION  ) + 
-                                ( c * NUM_DRUM_CLASSES * LOOP_DURATION ) + 
-                                ( i2 * LOOP_DURATION * instSide  ) +  
-                                ( r * NUM_DRUM_CLASSES * LOOP_DURATION * COLS ) + 
-                                t
-                        matrix2[counter] = matrix[pos]
-                        // console.log(counter, pos)
-                        counter++
-                    }
-                }
-            }
-        }
-    }
-
-    fs.writeFileSync(path+'-matrix-vis.data', matrix2)
-    
-
-    // Read the matrix just created using floats, and create a matrix using UInt8ClampedArray with bigger dots.
-    // const Px = 10 // scaling value for each pixel
-    // let matrix3 = new Uint8ClampedArray(COLS*ROWS*4*4*Px*Px)
-    // function fillI(r, ROWS, c, COLS, val, Px, rNi) {
-    //     for(let i_y = 0; i_y < rNi; i_y++) {
-    //         for(let i_x = 0; i_x < rNi; i_x++) {
-    //             for(let x = 0; x < Px; x++) {
-    //                 for(let y = 0; y < Px; y++) {
-    //                     if (i_x == 0) { matrix3[r*4+y, i_x*4+y] = [val*255, 0, 0, 255]}
-    //                     if (i_x == 1) matrix3[r*4+y, i_x*4+y] = [0, val*255, 0, 255]
-    //                     if (i_x == 2) matrix3[r*4+y, i_x*4+y] = [0, 0, val*255, 255]
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    
-    // for(let r = 0; r < ROWS; r++) {
-    //     for(let c = 0; c < COLS; c++) {
-    //         let val = matrix2[r * COLS + c]
-    //         fillI(r, ROWS, c, COLS, val, Px, Math.sqrt(NUM_DRUM_CLASSES))
-    //     }
-    // }
-
-    return "Matrices saved!"
-  }
-  
-
-
 Max.addHandler("savemodel", (path)=>{
     // check if already trained or not
     if (vae.isReadyToGenerate()){
-
-        // filepath = "file://" + path;
-        // vae.saveModel(filepath);
-        // utils.log_status("Model saved.");
-
- 
-
         filepath = "file://" + path;
         vae.saveModel(filepath).then(result => {
             utils.log_status('Model result was: ', result);
@@ -390,8 +291,10 @@ Max.addHandler("savemodel", (path)=>{
 
 Max.addHandler("loadmodel", (path)=>{
     filepath = "file://" + path;
-    vae.loadModel(filepath);
-    utils.log_status("Model loaded!");
+    // model = vae.loadModel(filepath);
+    vae.loadModel(filepath).then(result => {
+        utils.log_status("Model loaded!");
+    })
 });
 
 Max.addHandler("epochs", (e)=>{
@@ -399,20 +302,27 @@ Max.addHandler("epochs", (e)=>{
     utils.post("number of epochs: " + e);
 });
 
-
-let visualizerMatrix
-Max.addHandler("loadspace", () => {
-    let folder = "/Users/gabriel/Documents/3_GitHub/R-VAE"
-    let visPath = "/LS-1.data";
-    console.log(path.join(folder,visPath));
-    fs.readFile(path.join(folder,visPath), (err, buf) => {
-        if (err) throw err;
-        visualizerMatrix = new Float32Array(buf.buffer, buf.byteOffset, buf.byteLength/4);
-        utils.post("vis matrix:" + visualizerMatrix.slice(0,10));
-    })
-})
-
-
 function reportNumberOfBars(){
     Max.outlet("train_bars", train_data_onsets.length * 2);  // number of bars for training
 }
+
+Max.addHandler("visualizer", () => {
+    visualizer.createMatrix(vae.model).then(result => {
+        utils.log_status("Visualization generated!");
+    })
+})
+
+Max.addHandler("displayMatrix", (timestep) => {
+
+    // Max.outlet("visualizer", "Displaying Matrix");
+    // Max.outlet("visualizer", 'YAY');
+    visualizer.displayMatrix(timestep);
+})
+
+
+
+
+// function outputVisualizer(){
+//     // Max.outlet("visualizer", "visualizer.matrix3");
+//     Max.outlet("visualizer", visualizer.matrix3);
+// }
