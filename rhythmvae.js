@@ -292,9 +292,10 @@ Max.addHandler("savemodel", (path)=>{
 Max.addHandler("loadmodel", (path)=>{
     filepath = "file://" + path;
     // model = vae.loadModel(filepath);
-    vae.loadModel(filepath).then(result => {
-        utils.log_status("Model loaded!");
-    })
+    vae.loadModel(filepath)
+    .then(result => utils.log_status("Model loaded! "))
+    // .then(result2 => visualizer.createMatrix(vae.model))
+    // .then(result3 => utils.log_status("Visualization generated! "))
 });
 
 Max.addHandler("epochs", (e)=>{
@@ -307,9 +308,8 @@ function reportNumberOfBars(){
 }
 
 Max.addHandler("visualizer", () => {
-    visualizer.createMatrix(vae.model).then(result => {
-        utils.log_status("Visualization generated!");
-    })
+    visualizer.createMatrix(vae.model)
+    .then(result => utils.log_status("Visualization generated!"))
 })
 
 Max.addHandler("displayMatrix", (timestep) => {

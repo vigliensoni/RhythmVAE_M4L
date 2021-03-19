@@ -22,9 +22,9 @@ let red = new Array(); // RED pixels only, over time
 let visualizationDict = {}; // output matrix w/visualizer data
 
 
-async function generateVisualization(model) {
-  utils.post('Generate visualization:' + model)
-}
+// async function generateVisualization(model) {
+//   utils.post('Generate visualization:' + model)
+// }
 
 async function createMatrix(path){
 
@@ -157,4 +157,4 @@ exports.matrix3 = matrix3;
 exports.red = red;
 exports.createMatrix = createMatrix;
 exports.displayMatrix = displayMatrix;
-exports.generateVisualization = generateVisualization;
+// exports.generateVisualization = generateVisualization;
