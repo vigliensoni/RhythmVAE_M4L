@@ -26,6 +26,7 @@ Similarly to RhythmVAE, the goal of R-VAE is the exploration of latent spaces of
 
 - Make sure to open the `*.maxproj` project file. Then in the Project Inspector set *Max for Live Device Type* to “MIDI.“
 - Choose *Export Max for Live Device*
+- Don't forget to add to the `Search Paths` in `Project Settings` everything you need to include in your distribution (e.g., .maxpat files, .js files, node modules, etc.)
 - Get your M4L device from the `/release` folder
 - Play!
 
