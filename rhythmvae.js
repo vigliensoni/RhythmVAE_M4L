@@ -19,6 +19,13 @@ const COLS = 30 // number of cols for UI matrix
 // VAE model and Utilities
 const utils = require('./src/utils.js');
 const vae = require('./src/vae.js');
+const visualizer = require('./src/visualizer.js');
+
+const experiment = require('./src/experiment.js');
+
+
+// Visualizer and utilities
+
 
 // This will be printed directly to the Max console
 Max.post(`Loaded the ${path.basename(__filename)} script`);
@@ -249,6 +256,7 @@ async function generatePattern(z1, z2, threshold, noise_range){
   }
 }
 
+
 // Clear training data 
 Max.addHandler("clear_train", ()=>{
     train_data_onsets = []; // clear
@@ -399,3 +407,37 @@ Max.addHandler("epochs", (e)=>{
 function reportNumberOfBars(){
     Max.outlet("train_bars", train_data_onsets.length * 2);  // number of bars for training
 }
+
+Max.addHandler("visualizer", () => {
+    visualizer.createMatrix(vae.model)
+    .then(result => utils.log_status("Visualization generated!"))
+})
+
+Max.addHandler("displayMatrix", (timestep) => {
+
+    // Max.outlet("visualizer", "Displaying Matrix");
+    // Max.outlet("visualizer", 'YAY');
+    visualizer.displayMatrix(timestep);
+})
+
+
+
+
+// function outputVisualizer(){
+//     // Max.outlet("visualizer", "visualizer.matrix3");
+//     Max.outlet("visualizer", visualizer.matrix3);
+// }
+
+
+
+
+// EXPERIMENT
+// Clear training data 
+Max.addHandler("sample_space", ()=>{
+
+    utils.log_status("Sampling the space");
+    // generatePattern(z1, z2, threshold, noise_range);
+    experiment.sampleSpace();
+    
+    utils.log_status("Space sampled!")
+});
